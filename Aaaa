@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<title>Holi Special 💖</title>
+
+<style>
+*{
+    box-sizing:border-box;
+}
+
+body{
+    margin:0;
+    height:100vh;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    background:linear-gradient(135deg,#FFEAF4,#FFD6E8,#F3D9FF);
+    font-family:sans-serif;
+    overflow:hidden;
+    text-align:center;
+    padding:15px;
+}
+
+/* Letter Box */
+.letter{
+    background:white;
+    padding:25px 20px;
+    width:100%;
+    max-width:350px;
+    border-radius:20px;
+    box-shadow:0 10px 30px rgba(255,105,180,0.2);
+}
+
+/* Buttons */
+button{
+    padding:12px 22px;
+    border:none;
+    border-radius:30px;
+    margin:10px 8px;
+    font-size:16px;
+    cursor:pointer;
+    min-width:110px;
+}
+
+#openBtn,#yesBtn{
+    background:#FF8FAB;
+    color:white;
+}
+
+#noBtn{
+    background:#C77DFF;
+    color:white;
+    position:fixed;
+}
+
+.boldText{
+    font-size:38px;
+    font-weight:bold;
+    color:#B03060;
+}
+
+/* Floating Hearts */
+.heart{
+    position:fixed;
+    animation:float 5s linear infinite;
+}
+@keyframes float{
+    0%{transform:translateY(100vh); opacity:1;}
+    100%{transform:translateY(-10vh); opacity:0;}
+}
+
+/* Firework */
+.firework{
+    position:fixed;
+    width:6px;
+    height:6px;
+    border-radius:50%;
+    animation:explode 1s ease-out forwards;
+}
+@keyframes explode{
+    0%{transform:scale(1); opacity:1;}
+    100%{transform:scale(15); opacity:0;}
+}
+
+/* Holi Splash */
+.splash{
+    position:fixed;
+    width:180px;
+    height:180px;
+    border-radius:50%;
+    filter:blur(25px);
+    opacity:0.8;
+    animation:splashAnim 1s ease-out forwards;
+}
+@keyframes splashAnim{
+    0%{transform:scale(0);}
+    100%{transform:scale(2); opacity:0;}
+}
+</style>
+</head>
+
+<body>
+
+<div class="letter">
+    <h3>Hello 💕</h3>
+    <p>I wrote something special for you...</p>
+    <button id="openBtn" onclick="openLetter()">Open 💌</button>
+</div>
+
+<script>
+
+let noBtn;
+let moveCount=0;
+
+function openLetter(){
+    document.body.innerHTML =
+    "<div class='letter'>"+
+    "<h3>Will you listen to me? 🌸</h3>"+
+    "<button id='yesBtn' onclick='yes()'>Yes 💖</button>"+
+    "<button id='noBtn' ontouchstart='moveNo()'>No 😅</button>"+
+    "</div>";
+    noBtn=document.getElementById("noBtn");
+}
+
+function moveNo(){
+    moveCount++;
+    let x=Math.random()*(window.innerWidth-120);
+    let y=Math.random()*(window.innerHeight-60);
+    noBtn.style.left=x+"px";
+    noBtn.style.top=y+"px";
+}
+
+function yes(){
+    document.body.innerHTML =
+    "<h2 style='color:#B03060;'>🌸 HAPPY HOLI 🌸</h2>";
+
+    createHearts();
+    createFireworks();
+    holiExplosion();
+}
+
+function createHearts(){
+    setInterval(function(){
+        let heart=document.createElement("div");
+        heart.className="heart";
+        heart.innerHTML="💗";
+        heart.style.left=Math.random()*100+"vw";
+        heart.style.fontSize=(20+Math.random()*15)+"px";
+        document.body.appendChild(heart);
+        setTimeout(()=>heart.remove(),5000);
+    },500);
+}
+
+function createFireworks(){
+    setInterval(function(){
+        let fire=document.createElement("div");
+        fire.className="firework";
+        fire.style.background="hsl("+Math.random()*360+",100%,60%)";
+        fire.style.left=Math.random()*100+"vw";
+        fire.style.top=Math.random()*100+"vh";
+        document.body.appendChild(fire);
+        setTimeout(()=>fire.remove(),1000);
+    },400);
+}
+
+function holiExplosion(){
+    for(let i=0;i<12;i++){
+        let splash=document.createElement("div");
+        splash.className="splash";
+        splash.style.background="hsl("+Math.random()*360+",100%,50%)";
+        splash.style.left=Math.random()*100+"vw";
+        splash.style.top=Math.random()*100+"vh";
+        document.body.appendChild(splash);
+        setTimeout(()=>splash.remove(),1000);
+    }
+}
+
+</script>
+
+</body>
+</html>
